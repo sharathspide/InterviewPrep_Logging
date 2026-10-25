@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12-Week Backend & Product Interview Roadmap</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#e4e8f0;--accent:#3157d5;--accent2:#eaf0ff;--green:#16794b;--greenbg:#e7f7ef;--shadow:0 8px 28px rgba(26,39,75,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:linear-gradient(120deg,#14244b,#3157d5);color:#fff;padding:34px max(22px,calc((100% - 1200px)/2)) 28px}
+header h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 12px}header p{max-width:850px;color:#e3eaff;margin:0}
+.wrap{max-width:1200px;margin:24px auto;padding:0 18px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.stat,.panel,.week-card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.stat{padding:16px}.stat small{display:block;color:var(--muted);font-weight:600}.stat strong{display:block;font-size:25px;margin-top:4px}
+.progress{height:9px;background:#e8ecf5;border-radius:99px;overflow:hidden;margin-top:10px}.progress span{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0}.toolbar input,.toolbar select{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;color:var(--ink)}.toolbar input{flex:1;min-width:190px}
+button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 13px;cursor:pointer;color:var(--ink)}button.primary{background:var(--accent);color:white;border-color:var(--accent)}button:hover{filter:brightness(.97)}
+.notice{padding:13px 15px;background:var(--accent2);border-radius:12px;color:#243b7b;margin-bottom:18px}
+.week-card{margin:14px 0;overflow:hidden}.week-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 18px;cursor:pointer}.week-head h2{font-size:18px;margin:0}.week-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.week-meta{white-space:nowrap;font-size:13px;color:var(--muted)}
+.days{padding:0 14px 14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.day{border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;gap:11px;align-items:flex-start}.day.done{background:var(--greenbg);border-color:#b9e8ce}.day input{margin-top:5px;width:17px;height:17px;accent-color:var(--green);flex-shrink:0}.day-content{min-width:0;flex:1}.day-title{font-weight:700}.day small{color:var(--muted);display:block;margin:2px 0 7px}.day ul{padding-left:18px;margin:5px 0 8px}.day li{margin:3px 0}.day a,.resources a{color:#284fc4;text-decoration:none}.day a:hover,.resources a:hover{text-decoration:underline}.tag{display:inline-block;font-size:11px;font-weight:700;background:#f0f2f7;border-radius:5px;padding:2px 6px;margin:0 4px 4px 0;color:#505b70}
+.resources{padding:20px}.resources h2{margin:0 0 10px}.resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.resource{border:1px solid var(--line);border-radius:10px;padding:12px}.resource strong{display:block}.resource p{font-size:13px;color:var(--muted);margin:4px 0 7px}
+footer{color:var(--muted);font-size:13px;padding:20px 0 40px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.days{grid-template-columns:1fr}.resource-grid{grid-template-columns:1fr}.week-head{align-items:flex-start}.week-meta{white-space:normal;text-align:right}}
+@media print{.toolbar,button,.notice{display:none}.week-card{break-inside:avoid;box-shadow:none}.days{display:grid}.day{break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<header>
+  <h1>12-Week Backend Engineer Quest</h1>
+  <p>A practical 84-day roadmap for product-company interviews: Python DSA, LLD, HLD/system design, EF Core, and production-minded ASP.NET Core (.NET 8+). Use this as a daily checklist—not a promise of “mastery” in 12 weeks.</p>
+</header>
+<main class="wrap">
+  <section class="stats">
+    <div class="stat"><small>Days completed</small><strong id="doneCount">0 / 84</strong><div class="progress"><span id="overallBar"></span></div></div>
+    <div class="stat"><small>Overall progress</small><strong id="percent">0%</strong><div class="progress"><span id="percentBar"></span></div></div>
+    <div class="stat"><small>Current streak</small><strong id="streak">0 days</strong><small>Based on consecutive checked days</small></div>
+    <div class="stat"><small>Target cadence</small><strong>2–3 hrs/day</strong><small>6 study days + 1 review day weekly</small></div>
+  </section>
+  <div class="notice"><strong>Suggested daily split:</strong> 60–75 min DSA, 60–75 min backend/design, 15–20 min notes and review. On project days, prioritize building and testing over watching tutorials. Solve each DSA problem first, then read hints/editorials if needed.</div>
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search topics, days, or problems…">
+    <select id="filter"><option value="all">All days</option><option value="todo">Not completed</option><option value="done">Completed</option></select>
+    <button id="expandBtn">Expand all</button><button id="exportBtn">Export progress</button><button id="importBtn">Import progress</button><input id="importFile" type="file" accept="application/json" hidden>
+    <button id="printBtn">Print roadmap</button><button id="resetBtn">Reset</button>
+  </div>
+  <div id="roadmap"></div>
+  <section class="panel resources">
+    <h2>Core resource library</h2>
+    <div class="resource-grid">
+      <div class="resource"><strong>DSA patterns</strong><p>Practice problems by topic and difficulty.</p><a href="https://leetcode.com/problemset/" target="_blank" rel="noopener">LeetCode problemset ↗</a><br><a href="https://neetcode.io/roadmap" target="_blank" rel="noopener">NeetCode roadmap ↗</a></div>
+      <div class="resource"><strong>Python</strong><p>Language reference for interview solutions.</p><a href="https://docs.python.org/3/tutorial/" target="_blank" rel="noopener">Official Python tutorial ↗</a></div>
+      <div class="resource"><strong>ASP.NET Core</strong><p>Build APIs using supported .NET practices.</p><a href="https://learn.microsoft.com/aspnet/core/?view=aspnetcore-8.0" target="_blank" rel="noopener">ASP.NET Core docs ↗</a></div>
+      <div class="resource"><strong>EF Core</strong><p>Relationships, querying, migrations, performance.</p><a href="https://learn.microsoft.com/ef/core/" target="_blank" rel="noopener">EF Core docs ↗</a></div>
+      <div class="resource"><strong>System design</strong><p>Concepts and practical architecture exercises.</p><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">System Design Primer ↗</a></div>
+      <div class="resource"><strong>Design patterns</strong><p>Object-oriented principles and patterns.</p><a href="https://refactoring.guru/design-patterns" target="_blank" rel="noopener">Refactoring.Guru ↗</a></div>
+    </div>
+  </section>
+  <footer>Progress is saved in this browser on this device using local storage. Export a JSON backup before clearing browser data or moving devices. Links point to external learning/problem pages; this tracker does not submit solutions to those sites.</footer>
+</main>
+<script>
+const L=(name,url)=>`<a href="${url}" target="_blank" rel="noopener">${name} ↗</a>`;
+const lc=(slug,name)=>L(name||slug.replaceAll('-',' '),`https://leetcode.com/problems/${slug}/`);
+const weeks=[
+{title:"Foundations: Python, complexity & hash maps",goal:"Build the daily habit and get comfortable analyzing solutions.",days:[
+["Day 1 — Setup & baseline","Create your tracker and baseline","Set up Python, a Git repository, and a notes file. Review Big-O for arrays, hash maps, and nested loops. Solve Two Sum and Valid Anagram; write complexity for both.",["Python","Big-O"],[["Two Sum","two-sum"],["Valid Anagram","valid-anagram"]]],
+["Day 2 — Arrays & strings","Indexing, traversal, frequency counts","Solve Contains Duplicate and Best Time to Buy and Sell Stock. Re-solve yesterday’s problems without notes.",["Arrays"],[["Contains Duplicate","contains-duplicate"],["Best Time to Buy and Sell Stock","best-time-to-buy-and-sell-stock"]]],
+["Day 3 — Hash maps & sets","Membership, counts, grouping","Solve Group Anagrams and Top K Frequent Elements. Explain when a set vs dictionary is appropriate.",["Hashing"],[["Group Anagrams","group-anagrams"],["Top K Frequent Elements","top-k-frequent-elements"]]],
+["Day 4 — Two pointers","Sorted arrays and in-place updates","Solve Valid Palindrome and Two Sum II. Trace pointer movement on paper.",["Two pointers"],[["Valid Palindrome","valid-palindrome"],["Two Sum II","two-sum-ii-input-array-is-sorted"]]],
+["Day 5 — Sliding window","Fixed and variable windows","Solve Maximum Average Subarray I and Longest Substring Without Repeating Characters.",["Sliding window"],[["Maximum Average Subarray I","maximum-average-subarray-i"],["Longest Substring Without Repeating Characters","longest-substring-without-repeating-characters"]]],
+["Day 6 — ASP.NET API foundations","HTTP, controllers, DI and configuration","Create a .NET 8+ Web API. Add one health endpoint, structured configuration, Swagger/OpenAPI, and dependency injection. Read request/response status codes.",["ASP.NET"],[["ASP.NET Core fundamentals","https://learn.microsoft.com/aspnet/core/fundamentals/?view=aspnetcore-8.0"]]],
+["Day 7 — Review & checkpoint","Weekly review","Re-solve two DSA problems from memory. Summarize Big-O and HTTP/API basics. Commit your code and write 3 weak areas.",["Review"],[]]]},
+{title:"Core patterns & API quality",goal:"Strengthen problem-solving and create a clean API foundation.",days:[
+["Day 8 — Prefix sums","Range totals and cumulative state","Solve Range Sum Query - Immutable and Product of Array Except Self.",["Prefix sums"],[["Range Sum Query - Immutable","range-sum-query-immutable"],["Product of Array Except Self","product-of-array-except-self"]]],
+["Day 9 — Stack","LIFO, matching and monotonic thinking","Solve Valid Parentheses and Min Stack. Implement a stack-based solution and state its complexity.",["Stack"],[["Valid Parentheses","valid-parentheses"],["Min Stack","min-stack"]]],
+["Day 10 — Binary search","Search sorted spaces","Solve Binary Search and Search in Rotated Sorted Array. Be precise about inclusive/exclusive bounds.",["Binary search"],[["Binary Search","binary-search"],["Search in Rotated Sorted Array","search-in-rotated-sorted-array"]]],
+["Day 11 — Linked lists","Pointers and dummy nodes","Solve Reverse Linked List and Merge Two Sorted Lists. Draw pointer changes before coding.",["Linked list"],[["Reverse Linked List","reverse-linked-list"],["Merge Two Sorted Lists","merge-two-sorted-lists"]]],
+["Day 12 — API DTOs & validation","Separate transport models from persistence","Add request/response DTOs, validation, correct status codes, and consistent error responses to your API. Test invalid input in Swagger.",["ASP.NET","Validation"],[["Model validation docs","https://learn.microsoft.com/aspnet/core/mvc/models/validation?view=aspnetcore-8.0"]]],
+["Day 13 — Unit testing","Test behavior, not implementation details","Add tests for service logic and validation. Learn arrange-act-assert and test edge cases. Add a GitHub Actions build/test workflow if possible.",["Testing"],[["Testing in ASP.NET Core","https://learn.microsoft.com/aspnet/core/test/?view=aspnetcore-8.0"]]],
+["Day 14 — Review & checkpoint","Timed practice + API quality pass","Do one easy and one medium in 45 minutes. Check DTOs, validation, status codes, test coverage, and commits.",["Review"],[]]]},
+{title:"Trees, recursion & object-oriented design",goal:"Start LLD while learning tree traversal patterns.",days:[
+["Day 15 — Recursion","Base case, progress and call stack","Solve Maximum Depth of Binary Tree and Invert Binary Tree. Explain the recursive contract.",["Recursion"],[["Maximum Depth of Binary Tree","maximum-depth-of-binary-tree"],["Invert Binary Tree","invert-binary-tree"]]],
+["Day 16 — Tree DFS","Preorder, inorder, postorder","Solve Same Tree and Diameter of Binary Tree. Compare recursive and iterative traversal.",["Trees"],[["Same Tree","same-tree"],["Diameter of Binary Tree","diameter-of-binary-tree"]]],
+["Day 17 — Tree BFS","Queue and level-order traversal","Solve Binary Tree Level Order Traversal and Validate Binary Search Tree.",["Trees","BFS"],[["Binary Tree Level Order Traversal","binary-tree-level-order-traversal"],["Validate Binary Search Tree","validate-binary-search-tree"]]],
+["Day 18 — Heaps","Priority queues and top-k","Solve Kth Largest Element in an Array and Last Stone Weight using heapq.",["Heap"],[["Kth Largest Element in an Array","kth-largest-element-in-an-array"],["Last Stone Weight","last-stone-weight"]]],
+["Day 19 — OOP & SOLID","Encapsulation, abstraction, composition","Review SOLID and composition over inheritance. Model a library or parking lot: requirements, entities, responsibilities, interfaces.",["LLD"],[["SOLID principles","https://refactoring.guru/design-patterns/solid"]]],
+["Day 20 — LLD: class design","UML-lite and responsibility boundaries","Design a parking lot or library system. Write classes/interfaces, relationships, invariants, and 5 test cases; avoid overengineering.",["LLD"],[["UML and class design overview","https://refactoring.guru/design-patterns"]]],
+["Day 21 — Review & checkpoint","Explain one design out loud","Re-solve two tree/heap problems and explain your LLD in 10 minutes. Note where requirements were ambiguous.",["Review"],[]]]},
+{title:"Graphs, EF Core & persistence",goal:"Learn graph traversal and make the API persist real data.",days:[
+["Day 22 — Graph representation","Adjacency list, visited set","Solve Number of Islands and Flood Fill. Understand grid traversal as a graph.",["Graphs","DFS"],[["Number of Islands","number-of-islands"],["Flood Fill","flood-fill"]]],
+["Day 23 — Graph BFS/DFS","Connected components and reachability","Solve Clone Graph and Rotting Oranges. Compare queue-based BFS with recursive DFS.",["Graphs"],[["Clone Graph","clone-graph"],["Rotting Oranges","rotting-oranges"]]],
+["Day 24 — Topological sort","Dependency ordering","Solve Course Schedule and Course Schedule II. Explain cycle detection and indegrees.",["Graphs"],[["Course Schedule","course-schedule"],["Course Schedule II","course-schedule-ii"]]],
+["Day 25 — EF Core basics","DbContext, entities, migrations","Connect your .NET API to PostgreSQL using EF Core. Configure DbContext, connection strings via user secrets/environment variables, and migrations.",["EF Core"],[["EF Core overview","https://learn.microsoft.com/ef/core/"]]],
+["Day 26 — EF relationships","One-to-many, many-to-many, constraints","Model two related entities. Configure keys, relationships, delete behavior, indexes, and migrations. Inspect generated schema.",["EF Core"],[["Relationships","https://learn.microsoft.com/ef/core/modeling/relationships/"]]],
+["Day 27 — EF querying","LINQ, projection, tracking","Use AsNoTracking for read-only queries, DTO projection, pagination, and async EF methods. Inspect generated SQL.",["EF Core","LINQ"],[["Efficient querying","https://learn.microsoft.com/ef/core/performance/efficient-querying"]]],
+["Day 28 — Review & checkpoint","Persistence review","Implement and test one complete CRUD flow with PostgreSQL. Explain migration workflow, tracking, relationship mapping, and query performance risks.",["Review"],[]]]},
+{title:"Backtracking, caching & production API design",goal:"Build dependable endpoints and practice recursive search.",days:[
+["Day 29 — Backtracking","Choose, explore, undo","Solve Subsets and Combination Sum. Draw the recursion tree and identify pruning opportunities.",["Backtracking"],[["Subsets","subsets"],["Combination Sum","combination-sum"]]],
+["Day 30 — Backtracking II","Permutations and constraints","Solve Permutations and Word Search. Practice explaining state, choices, base case, and undo.",["Backtracking"],[["Permutations","permutations"],["Word Search","word-search"]]],
+["Day 31 — Intervals","Sorting and merging ranges","Solve Merge Intervals and Insert Interval. Explain why sorting helps.",["Intervals"],[["Merge Intervals","merge-intervals"],["Insert Interval","insert-interval"]]],
+["Day 32 — API architecture","Controller/service/repository boundaries","Refactor your API into clear responsibilities. Use DI, cancellation tokens, async calls, and avoid putting business logic in controllers.",["ASP.NET","Architecture"],[["Dependency injection","https://learn.microsoft.com/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0"]]],
+["Day 33 — Error handling & logging","Global exception handling and correlation","Add global exception handling, structured logs, correlation/request IDs, and safe error responses. Never return stack traces to clients.",["Reliability"],[["Error handling","https://learn.microsoft.com/aspnet/core/fundamentals/error-handling?view=aspnetcore-8.0"]]],
+["Day 34 — Caching & HTTP","Cache headers, in-memory/distributed cache","Add a small cache only where justified. Understand invalidation, TTL, cache stampede, and when not to cache.",["Caching"],[["Caching in ASP.NET Core","https://learn.microsoft.com/aspnet/core/performance/caching/overview?view=aspnetcore-8.0"]]],
+["Day 35 — Review & checkpoint","Backtracking + API walkthrough","Solve one medium backtracking problem. Walk through a request from HTTP entry to database response, including failure handling.",["Review"],[]]]},
+{title:"Dynamic programming, auth & secure APIs",goal:"Build DP fundamentals and secure your backend.",days:[
+["Day 36 — 1D dynamic programming","State, recurrence, base case","Solve Climbing Stairs and House Robber. Explain memoization vs tabulation.",["DP"],[["Climbing Stairs","climbing-stairs"],["House Robber","house-robber"]]],
+["Day 37 — DP strings & choices","Overlapping subproblems","Solve Coin Change and Longest Increasing Subsequence. Write the recurrence before code.",["DP"],[["Coin Change","coin-change"],["Longest Increasing Subsequence","longest-increasing-subsequence"]]],
+["Day 38 — 2D DP","Grid and sequence states","Solve Unique Paths and Longest Common Subsequence. Track dimensions and transition dependencies.",["DP"],[["Unique Paths","unique-paths"],["Longest Common Subsequence","longest-common-subsequence"]]],
+["Day 39 — Authentication","JWT, claims, expiry and password hashing","Implement authentication using established libraries, secure password hashing, short-lived access tokens, and configuration from secrets. Do not invent cryptography.",["Security"],[["ASP.NET Core authentication","https://learn.microsoft.com/aspnet/core/security/authentication/?view=aspnetcore-8.0"]]],
+["Day 40 — Authorization & API security","Policies, roles, scopes and validation","Protect endpoints with authorization policies. Validate input, configure CORS deliberately, and review secrets, rate limits, and OWASP API risks.",["Security"],[["Authorization","https://learn.microsoft.com/aspnet/core/security/authorization/introduction?view=aspnetcore-8.0"],["OWASP API Security","https://owasp.org/www-project-api-security/"]]],
+["Day 41 — EF Core transactions","Atomic changes and concurrency","Use transactions for multi-step changes; learn optimistic concurrency and unique constraints. Add tests for duplicate/conflicting writes.",["EF Core"],[["Transactions","https://learn.microsoft.com/ef/core/saving/transactions"]]],
+["Day 42 — Review & checkpoint","Security review + DP recall","Solve one DP problem without notes. Verify protected endpoints, invalid-token behavior, authorization failures, and secret handling.",["Review"],[]]]},
+{title:"Greedy, messaging & resilient services",goal:"Learn reliable async workflows and common interview patterns.",days:[
+["Day 43 — Greedy","Local choices and proof intuition","Solve Jump Game and Gas Station. Explain why the greedy choice is valid.",["Greedy"],[["Jump Game","jump-game"],["Gas Station","gas-station"]]],
+["Day 44 — Greedy & scheduling","Sorting by constraints","Solve Non-overlapping Intervals and Task Scheduler.",["Greedy"],[["Non-overlapping Intervals","non-overlapping-intervals"],["Task Scheduler","task-scheduler"]]],
+["Day 45 — Tries & bit basics","Prefix search and bit operations","Solve Implement Trie and Single Number. Explain when a trie is useful.",["Trie","Bits"],[["Implement Trie","implement-trie-prefix-tree"],["Single Number","single-number"]]],
+["Day 46 — Background work","Hosted services and queues","Understand background services and why long-running work should not block an HTTP request. Implement a simple queued task with observable status.",["ASP.NET"],[["Background tasks","https://learn.microsoft.com/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-8.0"]]],
+["Day 47 — Messaging patterns","Outbox, retries, idempotency","Design a reliable event flow: database update + outbox, worker delivery, retry/backoff, dead-letter handling, idempotency key. Document duplicate-delivery behavior.",["Distributed systems"],[["Transactional outbox pattern","https://microservices.io/patterns/data/transactional-outbox.html"]]],
+["Day 48 — Resilience","Timeouts, retries, circuit breakers","Learn transient vs permanent failures. Add bounded retries and timeouts where appropriate; avoid retrying non-idempotent operations blindly.",["Reliability"],[["Microsoft resilience guidance","https://learn.microsoft.com/dotnet/core/resilience/"]]],
+["Day 49 — Review & checkpoint","Explain an event delivery system","Solve one greedy problem. Explain event flow, failure modes, retries, idempotency, and monitoring on a whiteboard.",["Review"],[]]]},
+{title:"HLD & system design fundamentals",goal:"Structure design interviews from requirements to trade-offs.",days:[
+["Day 50 — Design interview framework","Requirements, APIs, scale, constraints","For URL shortener, define functional/nonfunctional requirements, rough traffic/storage estimates, API contract, and a high-level diagram.",["HLD"],[["System Design Primer","https://github.com/donnemartin/system-design-primer"]]],
+["Day 51 — Networking & load balancing","DNS, TLS, HTTP, reverse proxy","Explain browser/client to service request flow. Learn load balancers, health checks, TLS termination, and horizontal scaling.",["HLD"],[["HTTP overview","https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview"]]],
+["Day 52 — Databases & indexes","SQL vs NoSQL, indexes, replication","Compare relational vs document/key-value storage. Explain indexes, read replicas, partitioning, consistency and query trade-offs.",["HLD"],[["PostgreSQL indexes","https://www.postgresql.org/docs/current/indexes.html"]]],
+["Day 53 — Caching & CDN","Cache keys, TTL, invalidation","Design caching for a read-heavy service. Cover cache-aside, CDN, hot keys, stale data, and invalidation.",["HLD"],[["System Design Primer","https://github.com/donnemartin/system-design-primer"]]],
+["Day 54 — Queues & async processing","Buffering, consumers, ordering","Design an email/notification pipeline. Explain queue backlog, consumer scaling, at-least-once delivery, poison messages and observability.",["HLD"],[["Messaging patterns","https://learn.microsoft.com/azure/architecture/guide/technology-choices/messaging"]]],
+["Day 55 — Rate limiting","Token bucket, leaky bucket, quotas","Design rate limiting for a public API; choose per-user/API-key limits, distributed counters, and 429 responses.",["HLD"],[["Rate limiting pattern","https://learn.microsoft.com/azure/architecture/patterns/rate-limiting-pattern"]]],
+["Day 56 — Review & checkpoint","One 45-minute system design","Design URL shortener end-to-end. Include API, data model, scaling, failure cases, and two explicit trade-offs.",["Review"],[]]]},
+{title:"Advanced EF Core & backend performance",goal:"Improve database correctness, performance and maintainability.",days:[
+["Day 57 — EF query performance","N+1, projection, pagination","Inspect SQL for representative endpoints. Remove N+1 queries, project only needed fields, and paginate safely.",["EF Core"],[["Efficient querying","https://learn.microsoft.com/ef/core/performance/efficient-querying"]]],
+["Day 58 — Loading strategies","Eager, explicit and lazy loading","Compare loading strategies and split queries. Avoid accidental over-fetching and understand cartesian explosion.",["EF Core"],[["Related data","https://learn.microsoft.com/ef/core/querying/related-data/"]]],
+["Day 59 — Concurrency & resilience","Optimistic concurrency and retries","Implement a concurrency token or version check. Define conflict responses and test two updates racing.",["EF Core"],[["Concurrency handling","https://learn.microsoft.com/ef/core/saving/concurrency"]]],
+["Day 60 — Transactions & bulk work","Atomicity and efficient writes","Use transactions appropriately and learn set-based ExecuteUpdate/ExecuteDelete. Know when raw SQL is justified.",["EF Core"],[["ExecuteUpdate and ExecuteDelete","https://learn.microsoft.com/ef/core/saving/execute-insert-update-delete"]]],
+["Day 61 — Observability","Logs, metrics, traces, health checks","Add health checks and useful structured logs. Identify latency, error rate, throughput, and saturation as operational signals.",["Production"],[["Health checks","https://learn.microsoft.com/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-8.0"]]],
+["Day 62 — Docker & configuration","Repeatable local environment","Containerize the API and run PostgreSQL locally with Compose. Keep secrets out of images/repository; document startup and migrations.",["DevOps"],[["Docker .NET guide","https://learn.microsoft.com/dotnet/core/docker/"]]],
+["Day 63 — Review & checkpoint","Performance and operational pass","Record baseline response/query behavior, add one useful index based on query needs, and write run instructions for a fresh machine.",["Review"],[]]]},
+{title:"LLD patterns & design interviews",goal:"Practice extensible object design without unnecessary complexity.",days:[
+["Day 64 — Strategy & Factory","Swap behavior and object creation","Implement a notification/payment method abstraction using Strategy; use Factory only if creation logic benefits. Add tests for new implementations.",["LLD","Patterns"],[["Strategy","https://refactoring.guru/design-patterns/strategy"],["Factory Method","https://refactoring.guru/design-patterns/factory-method"]]],
+["Day 65 — Observer & Decorator","Events and cross-cutting behavior","Model event subscribers or notification observers; use a decorator for logging/caching only where useful. Explain trade-offs.",["LLD","Patterns"],[["Observer","https://refactoring.guru/design-patterns/observer"],["Decorator","https://refactoring.guru/design-patterns/decorator"]]],
+["Day 66 — LLD: elevator/parking lot","Requirements, state and concurrency","Choose elevator or parking lot. Define state transitions, entities, interfaces, concurrency concerns, edge cases and tests.",["LLD"],[["LLD practice prompts","https://github.com/prasadgujar/low-level-design-primer"]]],
+["Day 67 — LLD: rate limiter","Interface and algorithm design","Design an in-process token bucket limiter. Define clock abstraction, concurrency behavior, per-key state and test strategy.",["LLD"],[["Rate limiting pattern","https://learn.microsoft.com/azure/architecture/patterns/rate-limiting-pattern"]]],
+["Day 68 — Clean architecture trade-offs","Boundaries without ceremony","Review dependency direction, domain rules, application services and infrastructure. Refactor only where it improves testability or change isolation.",["Architecture"],[["Architecture guidance","https://learn.microsoft.com/dotnet/architecture/modern-web-apps-azure/"]]],
+["Day 69 — LLD mock interview","Clarify then design","Do a 45-minute LLD prompt. Spend first 5–10 minutes clarifying requirements, then model classes, APIs, invariants and tests.",["Interview"],[]],
+["Day 70 — Review & checkpoint","Present and critique your design","Explain one design in 10 minutes. Identify one over-abstraction and one missing edge case; revise your diagram/code.",["Review"],[]]]},
+{title:"Capstone: production-minded invoice API",goal:"Bring backend, EF Core, auth, tests and design together.",days:[
+["Day 71 — Scope & architecture","Define MVP and data model","Use an invoice API as capstone: create/read/update invoices, line items, totals, ownership, status rules. Write API contract and architecture diagram.",["Project"],[["ASP.NET Core docs","https://learn.microsoft.com/aspnet/core/?view=aspnetcore-8.0"]]],
+["Day 72 — Persistence & migrations","PostgreSQL schema and constraints","Implement entities, EF Core mappings, decimal money types, constraints, indexes, and migrations. Test migration from a clean database.",["Project","EF Core"],[["EF Core modeling","https://learn.microsoft.com/ef/core/modeling/"]]],
+["Day 73 — CRUD & validation","DTOs and predictable responses","Complete CRUD endpoints with DTOs, validation, pagination where appropriate, and consistent error handling. Add Swagger examples.",["Project"],[]],
+["Day 74 — Auth & ownership","Secure invoice access","Add authentication/authorization and ensure users can access only their own invoices. Test unauthenticated, forbidden, and valid flows.",["Project","Security"],[]],
+["Day 75 — PDF/email workflow design","Separate request from long-running work","Design PDF generation and email delivery as background work. Add idempotency and a durable status model; don't block request on email provider.",["Project","Messaging"],[["Background tasks","https://learn.microsoft.com/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-8.0"]]],
+["Day 76 — Tests & observability","Unit, integration and failure tests","Test business rules, API/database integration, invalid input, duplicate requests, and provider failure. Add logs and health checks.",["Project","Testing"],[["ASP.NET testing","https://learn.microsoft.com/aspnet/core/test/?view=aspnetcore-8.0"]]],
+["Day 77 — Review & checkpoint","Demo and documentation","Write README, architecture diagram, setup steps, sample requests, known limitations and next steps. Demo from a clean checkout.",["Project"],[]]]},
+{title:"Interview sprint: timed DSA, design & applications",goal:"Convert learning into clear interview performance and a demonstrable portfolio.",days:[
+["Day 78 — Timed arrays/hash/strings","Mixed pattern recognition","Complete 2 unseen easy/medium problems in 60 minutes. Explain brute force, optimization, complexity and edge cases.",["DSA","Mock"],[["LeetCode problemset","https://leetcode.com/problemset/"]]],
+["Day 79 — Timed trees/graphs","Traversal and state tracking","Complete 1 tree and 1 graph problem under time. Review mistakes and redo one solution cleanly.",["DSA","Mock"],[["NeetCode roadmap","https://neetcode.io/roadmap"]]],
+["Day 80 — Timed DP/backtracking","Recurrence and search state","Complete 1 DP/backtracking medium. Write state and recurrence before coding; don't measure success only by accepted status.",["DSA","Mock"],[["LeetCode problemset","https://leetcode.com/problemset/"]]],
+["Day 81 — System design mock","URL shortener or notification service","Run a 45-minute mock: requirements, estimates, API, schema, diagram, bottlenecks, failure handling and trade-offs.",["HLD","Mock"],[["System Design Primer","https://github.com/donnemartin/system-design-primer"]]],
+["Day 82 — Backend interview mock","Explain the capstone end-to-end","Practice questions on DI, middleware, async/await, JWT, EF tracking, migrations, transactions, indexes, tests, caching and retries.",["Backend","Mock"],[["ASP.NET Core docs","https://learn.microsoft.com/aspnet/core/?view=aspnetcore-8.0"],["EF Core docs","https://learn.microsoft.com/ef/core/"]]],
+["Day 83 — Resume & applications","Evidence-based project storytelling","Write impact-focused project bullets without inventing metrics. Add README, screenshots/API examples, architecture diagram and repository link. Apply to a focused batch of roles.",["Career"],[["STAR interview method","https://www.themuse.com/advice/star-interview-method"]]],
+["Day 84 — Final review & next plan","Assess gaps and keep the loop going","Repeat a mock interview, list weak patterns, and create the next 30-day plan based on evidence. Review progress export and keep solving problems.",["Review","Career"],[]]]}
+];
+const stateKey="backendQuest12Week_v1";
+let state=JSON.parse(localStorage.getItem(stateKey)||"{}");
+let expanded=true;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function linkFor(item){const [name,slug]=item; if(slug.startsWith("http"))return L(name,slug);return lc(slug,name)}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim(), filter=document.getElementById("filter").value;
+ const root=document.getElementById("roadmap");root.innerHTML="";let shown=0;
+ weeks.forEach((week,wi)=>{
+  const weekDays=week.days.map((d,di)=>({d,di,id:`${wi}-${di}`,done:!!state[`${wi}-${di}`]})).filter(x=>{
+   const hay=(x.d[0]+" "+x.d[1]+" "+x.d[2]+" "+x.d[3].join(" ")).toLowerCase();
+   return (!q||hay.includes(q))&&(filter==="all"||(filter==="done"&&x.done)||(filter==="todo"&&!x.done));
+  });
+  if(!weekDays.length)return;
+  shown+=weekDays.length;
+  const card=document.createElement("section");card.className="week-card";
+  const done=week.days.filter((d,di)=>state[`${wi}-${di}`]).length;
+  card.innerHTML=`<div class="week-head"><div><h2>Week ${wi+1}: ${esc(week.title)}</h2><p>${esc(week.goal)}</p></div><div class="week-meta">${done}/7 complete　⌄</div></div><div class="days" style="display:${expanded?"grid":"none"}"></div>`;
+  card.querySelector(".week-head").addEventListener("click",()=>{const days=card.querySelector(".days");days.style.display=days.style.display==="none"?"grid":"none"});
+  const daysEl=card.querySelector(".days");
+  weekDays.forEach(({d,di,id,done})=>{
+   const day=document.createElement("article");day.className="day"+(done?" done":"");
+   const taskLinks=d[4].map(linkFor).join(" · ");
+   day.innerHTML=`<input type="checkbox" aria-label="Mark ${esc(d[0])} complete" ${done?"checked":""}><div class="day-content"><div class="day-title">${esc(d[0])}</div><small>${esc(d[1])}</small><div>${d[3].map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div><ul>${d[2].split(". ").filter(Boolean).map(s=>`<li>${esc(s.replace(/\.$/,""))}</li>`).join("")}</ul>${taskLinks?`<div>${taskLinks}</div>`:""}</div>`;
+   day.querySelector("input").addEventListener("change",e=>{state[id]=e.target.checked;if(!e.target.checked)delete state[id];save();renderStats();day.classList.toggle("done",e.target.checked);});
+   daysEl.appendChild(day);
+  });
+  root.appendChild(card);
+ });
+ if(!shown)root.innerHTML='<div class="panel" style="padding:20px">No days match this search/filter.</div>';
+ document.getElementById("expandBtn").textContent=expanded?"Collapse all":"Expand all";
+}
+function save(){localStorage.setItem(stateKey,JSON.stringify(state))}
+function renderStats(){
+ const total=84,done=Object.values(state).filter(Boolean).length,p=Math.round(done/total*100);
+ document.getElementById("doneCount").textContent=`${done} / ${total}`;document.getElementById("percent").textContent=p+"%";
+ document.getElementById("overallBar").style.width=p+"%";document.getElementById("percentBar").style.width=p+"%";
+ let streak=0;for(let i=83;i>=0;i--){if(state[`${Math.floor(i/7)}-${i%7}`])streak++;else break}
+ document.getElementById("streak").textContent=streak+" day"+(streak===1?"":"s");
+}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filter").addEventListener("change",render);
+document.getElementById("expandBtn").addEventListener("click",()=>{expanded=!expanded;render()});
+document.getElementById("exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),completed:state},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="backend-quest-progress.json";a.click();URL.revokeObjectURL(a.href)});
+document.getElementById("importBtn").addEventListener("click",()=>document.getElementById("importFile").click());
+document.getElementById("importFile").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());state=obj.completed||obj;save();render();renderStats();alert("Progress imported.");}catch{alert("Could not read that progress file.");}e.target.value=""});
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+document.getElementById("resetBtn").addEventListener("click",()=>{if(confirm("Reset all 84 days? Export your progress first if you need a backup.")){state={};save();render();renderStats()}});
+render();renderStats();
+</script>
+</body></html>
