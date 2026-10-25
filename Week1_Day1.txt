@@ -1,0 +1,45 @@
+Problem 1:
+Two Sum - LeetCode - https://leetcode.com/problems/two-sum/description/
+
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        seen = {}
+        for i in range (len(nums)):
+            expected = target-nums[i]
+            if expected in seen:
+                return [i, seen[expected]]
+            else:
+                seen[nums[i]] = i
+        return []
+
+
+
+Problem 2:
+Valid Anagram - LeetCode - https://leetcode.com/problems/valid-anagram/description/
+
+class Solution:
+    def extractrepeat(self, word: str) -> dict:
+        seen = {}
+        for letter in word:
+            if letter in seen:
+                seen[letter] +=1
+            else:
+                seen[letter] = 1
+        
+        return seen
+
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        else:
+            letter_count_s = self.extractrepeat(s)
+            letter_count_t = self.extractrepeat(t)
+            for letter in letter_count_s:
+                if letter not in letter_count_t:
+                    return False
+                elif letter_count_s[letter] != letter_count_t[letter]:
+                    return False
+                else:
+                    continue
+            
+        return True
